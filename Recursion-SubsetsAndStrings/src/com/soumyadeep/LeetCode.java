@@ -11,10 +11,15 @@ public class LeetCode {
 //        System.out.println(subset(new int[]{1, 2, 3}));
 //
 //        permutations("","abc");
+//
+//        System.out.println(subsequenceList("abc"));
+//        System.out.println(subsetList(73));
+//
+//        diceFace("",5,8);
+//        System.out.println(diceFaceList("",4,10));
 
-        System.out.println(subsequenceList("abc"));
-
-        System.out.println(subsetList(73));
+        letterCombination("","12");
+        System.out.println(letterCombinationList("","52"));
     }
     static void subsequences(String p,String up){
         if(up.isEmpty()){
@@ -120,17 +125,17 @@ public class LeetCode {
             }else if(digit==7){
                 for (int j = (digit-2)*3; j <= (digit-1)*3; j++) {
                     String ch=outer.get(i)+(char) ('a'+i);
-                    outer.add(String.valueOf(ch));
+                    outer.add(ch);
                 }
             }else if(digit==8){
                 for (int j = ((digit-2)*3)+1; j <= (digit-1)*3; j++) {
                     String ch=outer.get(i)+(char) ('a'+i);
-                    outer.add(String.valueOf(ch));
+                    outer.add(ch);
                 }
             }else if(digit==9){
                 for (int j = ((digit-2)*3)+1; j <= ((digit-1)*3)+1; j++) {
                     String ch=outer.get(i)+(char) ('a'+i);
-                    outer.add(String.valueOf(ch));
+                    outer.add(ch);
                 }
             }
         }
@@ -138,5 +143,54 @@ public class LeetCode {
         return outer;
     }
 
+    static void diceFace(String p,int target,int face){
+        if(target==0){
+            System.out.print(p+" ");
+            return;
+        }
+        for (int i = 1; i <= target && i<= face ; i++) {
+            diceFace(p+i,target-i,face);
+        }
+    }
+
+    static ArrayList<String> diceFaceList(String p,int target,int face){
+        ArrayList<String> ans=new ArrayList<>();
+        if(target==0){
+            ArrayList<String > list=new ArrayList<>();
+            list.add(p);
+            return list;
+        }
+        for (int i = 1; i <= target && i<= face ; i++) {
+            ans.addAll(diceFaceList(p+i,target-i,face));
+        }
+        return ans;
+    }
+
+    static void letterCombination(String p,String up){
+        if(up.isEmpty()){
+            System.out.print(p+" ");
+            return;
+        }
+        int digit=up.charAt(0)-'0';
+        for (int i = (digit-1)*3; i < digit*3; i++) {
+            char ch= (char) ('a'+i);
+            letterCombination(p+ch,up.substring(1));
+        }
+    }
+
+    static ArrayList<String> letterCombinationList(String p,String up){
+        ArrayList<String> ans=new ArrayList<>();
+        if(up.isEmpty()){
+            ArrayList<String> list=new ArrayList<>();
+            list.add(p);
+            return list;
+        }
+        int digit=up.charAt(0)-'0';
+        for (int i = (digit-1)*3; i < digit*3; i++) {
+            char ch= (char) ('a'+i);
+            ans.addAll(letterCombinationList(p+ch,up.substring(1)));
+        }
+        return ans;
+    }
 
 }
