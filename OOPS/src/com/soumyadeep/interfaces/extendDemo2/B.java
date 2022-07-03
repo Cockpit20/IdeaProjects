@@ -1,5 +1,9 @@
-package com.soumyadeep.interfaces.extendDemo;
+package com.soumyadeep.interfaces.extendDemo2;
 
-public interface B extends A{
+public interface B {
     void greet();
+
+    default void fun(){
+        System.out.println("I am in A");
+    }
 }

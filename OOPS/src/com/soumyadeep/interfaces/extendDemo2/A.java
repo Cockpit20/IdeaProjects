@@ -1,5 +1,13 @@
-package com.soumyadeep.interfaces.extendDemo;
+package com.soumyadeep.interfaces.extendDemo2;
 
 public interface A {
-    void fun();
+//    Static Interface methods should always have a body
+//    Call via the interface name
+    static void greeting(){
+        System.out.println("Hey I am static method");
+    }
+
+    default void fun(){
+        System.out.println("I am in A");
+    };
 }
